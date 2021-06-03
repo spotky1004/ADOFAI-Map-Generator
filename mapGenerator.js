@@ -2,8 +2,6 @@
 
 import ADOFAI from "./ADOFAI-WebModule-master/ADOFAI-WebModule.js";
 
-const path = ["W", "H", "Q", "G", "q", "U", "o", "T", "E", "J", "p", "R", "A", "M", "C", "B", "Y", "D", "V", "F", "Z", "N", "x", "L"];
-
 function generateMap(musicData) {
     let map = new ADOFAI();
     // let bpmFactor = 1
@@ -21,19 +19,6 @@ function generateMap(musicData) {
         map.actions.push( new ADOFAI.Action(i-1, "SetSpeed") );
         map.actions[i-2].eventValue.beatsPerMinute = 60*1000/(musicData[i]-musicData[i-1]);
     }
-
-    /*l et pathAcc = 180/15-1;
-    for (let i = 1, l = musicData.beats.length; i < l; i++) {
-        console.log((musicData.beats[i]-musicData.beats[i-1])/musicData.beatInterval/bpmFactor);
-        const toAdd = Math.round((musicData.beats[i]-musicData.beats[i-1])/musicData.beatInterval*360/15/bpmFactor);
-        if (i < 10 && ![6, 12].includes(1)) {
-            //i--;
-            //continue;
-        }
-
-        pathAcc += toAdd+180/15;
-        map.pathData.push( new ADOFAI.PathData(path[pathAcc%path.length]) );
-    }*/
     
     document.getElementById("mapOutput").innerHTML = map.Export();
     console.log(map);
