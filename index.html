@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Lib -->
+    <script src="music-tempo.min.js"></script>
+
+    <!-- Script -->
+    <script src="./analyzeSong.js" defer></script>
+    <script src="./mapGenerator.js" type="module"></script>
+
+    <title>ADOFAI Map Generator</title>
+</head>
+<body>
+    <fieldset>
+        <legend>Input</legend>
+        <input id="audio_file" type="file" accept="audio/*" onchange="audioAccepted(this.files[0], this)" />
+    </fieldset>
+</body>
+</html>
