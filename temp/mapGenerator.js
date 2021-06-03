@@ -6,20 +6,21 @@ const path = ["W", "H", "Q", "G", "q", "U", "o", "T", "E", "J", "p", "R", "A", "
 
 function generateMap(musicData) {
     let map = new ADOFAI();
-    // let bpmFactor = 1
+    // let bpmFactor = 1;
+
     map.pathData = [];
 
-    map.settings.offset = musicData[1];
+    map.settings.offset = (musicData.beats[0])*1000;
     map.settings.trackColor = "debb7b";
     map.settings.backgroundColor = "000000";
     map.settings.songFilename = document.getElementById("audio_file").files[0].name;
 
-    map.settings.bpm = 60*1000/audioData.beatDetectTime[1];
+    map.settings.bpm = 60/musicData.beats[0];
     
-    for (let i = 2, l = musicData.length; i < l; i++) {
+    for (let i = 1, l = musicData.beats.length; i < l; i++) {
         map.pathData.push( new ADOFAI.PathData("R") );
-        map.actions.push( new ADOFAI.Action(i-1, "SetSpeed") );
-        map.actions[i-2].eventValue.beatsPerMinute = 60*1000/(musicData[i]-musicData[i-1]);
+        map.actions.push( new ADOFAI.Action(i+1, "SetSpeed") );
+        map.actions[i].eventValue.beatsPerMinute = 60/(musicData.beats[i]-(musicData.beats[i-1] ?? 0));
     }
 
     /*l et pathAcc = 180/15-1;
