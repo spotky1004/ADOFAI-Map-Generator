@@ -20,12 +20,11 @@ function generateMap(musicData) {
     let pathAcc = 180/15-1;
     for (let i = 1, l = musicData.beats.length; i < l; i++) {
         const toAdd = Math.round((musicData.beats[i]-musicData.beats[i-1])/musicData.beatInterval*360/bpmFactor/15);
-        console.log(toAdd);
         pathAcc += toAdd+180/15;
         map.pathData.push( new ADOFAI.PathData(path[pathAcc%path.length]) );
     }
     
-    console.log(map.Export());
+    document.getElementById("mapOutput").innerHTML = map.Export();
 }
 
 window.generateMap = generateMap;
