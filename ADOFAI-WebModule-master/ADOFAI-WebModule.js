@@ -18,7 +18,7 @@
 import AdofaiMapPathData from "./src/AdofaiMapPathData.js";
 import AdofaiMapSettings from "./src/AdofaiMapSettings.js";
 import AdofaiMapAction from "./src/AdofaiMapAction.js";
-import Enums from "./src/data_types/_init.js";
+import Enums from "./src/data_types/init.js";
 import Color from "./src/data_types/color.js";
 
 /**
