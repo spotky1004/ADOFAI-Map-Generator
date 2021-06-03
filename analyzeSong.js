@@ -46,7 +46,6 @@ function analyzeSong() {
         } else {
             if (scanningPeak !== -1) {
                 const mid = Math.floor((scanningPeak+i)/2);
-                console.log(mid, Math.floor(perDt*mid), skippedData[mid]);
                 audioData.beatDetectTime.push(Math.floor(perDt*mid));
                 audioData.beatDetectRespectively.push(skippedData[mid]);
                 scanningPeak = -1;
