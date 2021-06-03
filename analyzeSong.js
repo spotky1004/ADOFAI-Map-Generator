@@ -38,19 +38,19 @@ function analyzeSong() {
 
     audioData.beatDetectTime = [];
     audioData.beatDetectRespectively = [];
-    let beatDetectIdx = [];
     let lastData = 0;
-    let isAlreadyPeak = false;
+    let scanningPeak = -1;
     for (let i = 0, l = skippedData.length; i < l; i++) {
         if (skippedData[i] > lastData) {
-            if (!isAlreadyPeak) {
-                audioData.beatDetectTime.push(Math.floor(perDt*i));
-                audioData.beatDetectRespectively.push(skippedData[i]);
-                beatDetectIdx.push(i);
-                isAlreadyPeak = true;
-            }
+            scanningPeak = i;
         } else {
-            isAlreadyPeak = false;
+            if (scanningPeak !== -1) {
+                const mid = Math.floor((scanningPeak+i)/2);
+                console.log(mid, Math.floor(perDt*mid), skippedData[mid]);
+                audioData.beatDetectTime.push(Math.floor(perDt*mid));
+                audioData.beatDetectRespectively.push(skippedData[mid]);
+                scanningPeak = -1;
+            }
         }
         lastData = skippedData[i];
     }
