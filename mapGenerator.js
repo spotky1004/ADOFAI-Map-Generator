@@ -6,7 +6,7 @@ function generateMap(musicData) {
     let map = new ADOFAI();
     map.pathData = [];
 
-    map.settings.offset = musicData[0];
+    map.settings.offset = musicData[0]-40;
     map.settings.trackColor = "debb7b";
     map.settings.backgroundColor = "000000";
     map.settings.songFilename = document.getElementById("audio_file").files[0].name;
