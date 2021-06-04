@@ -28,7 +28,13 @@ function audioAccepted(file, t) {
 
 
 function analyzeSong() {
-    const channelToanAnalyze = [...audioLoaded.getChannelData(0)];
+    const channelToanAnalyze = [];
+    const channelCount = audioLoaded.numberOfChannels;
+    const channels = new Array(channelCount).fill(null).map((e, i) => e = audioLoaded.getChannelData(i));
+    for (let i = 0, l = channels[0].length; i < l; i++) {
+        channelToanAnalyze.push( channels.reduce((a, _, idx) => a+channels[idx][i], 0)/channelCount );
+    }
+
     const perDt = (Math.max(document.getElementsByName("analyzeTick")[0].value, 0.001) || 0.1)*1000;
     const per = Math.floor(channelToanAnalyze.length/audioData.duration*perDt/1000);
     let skippedData = [];
@@ -41,8 +47,9 @@ function analyzeSong() {
     let lastData = 0;
     let scanningPeak = -1;
     let min = -1;
+    const minimumDifference = Number(document.getElementsByName("minimumDifference")[0].value ?? 0.1);
     for (let i = 0, l = skippedData.length; i < l; i++) {
-        if (skippedData[i] > lastData && skippedData[i] > 0.1 && skippedData[i] > min+0.1) {
+        if (skippedData[i] > lastData && skippedData[i] > 0.1 && skippedData[i] > min+minimumDifference) {
             scanningPeak = i;
         } else if (scanningPeak !== -1) {
             audioData.beatDetectTime.push(Math.floor(perDt*scanningPeak));
