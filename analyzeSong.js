@@ -42,32 +42,18 @@ function analyzeSong() {
     let scanningPeak = -1;
     let min = -1;
     for (let i = 0, l = skippedData.length; i < l; i++) {
-        if (skippedData[i] > lastData && skippedData[i] > 0.1) {
+        if (skippedData[i] > lastData && skippedData[i] > 0.1 && skippedData[i] > min+0.1) {
             scanningPeak = i;
         } else if (scanningPeak !== -1) {
-            const mid = scanningPeak;
-            audioData.beatDetectTime.push(Math.floor(perDt*mid));
-            audioData.beatDetectRespectively.push(skippedData[mid]);
+            audioData.beatDetectTime.push(Math.floor(perDt*scanningPeak));
+            audioData.beatDetectRespectively.push(skippedData[scanningPeak]);
+            min = skippedData[scanningPeak];
             scanningPeak = -1;
         } else {
             min = Math.min(min, skippedData[i]);
         }
         lastData = skippedData[i];
     }
-    /*for (let i = 0, l = skippedData.length; i < l; i++) {
-        if (skippedData[i] > lastData && Math.min(min+0.1, min*1.1) < skippedData[i] && skippedData[i] > 0.1) {
-            scanningPeak = i;
-        } else if (scanningPeak !== -1) {
-            const mid = Math.floor(i-Math.max(0, Math.min(10, (i-scanningPeak)*0.5)));
-            audioData.beatDetectTime.push(Math.floor(perDt*mid));
-            audioData.beatDetectRespectively.push(skippedData[mid]);
-            scanningPeak = -1;
-            min = skippedData[mid];
-        } else {
-            min = Math.min(min, skippedData[i]);
-        }
-        lastData = skippedData[i];
-    }*/
 
     generateMap(audioData.beatDetectTime);
 }

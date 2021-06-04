@@ -16,8 +16,8 @@ function generateMap(musicData) {
     const o = 1;
     for (let i = o, l = musicData.length; i < l; i++) {
         map.pathData.push( new ADOFAI.PathData("R") );
-        map.actions.push( new ADOFAI.Action(i-o+1, "SetSpeed") );
-        map.actions[i-o].eventValue.beatsPerMinute = 60*1000/(musicData[i]-musicData[i-1]);
+        map.actions.push( new ADOFAI.Action(i, "SetSpeed") );
+        map.actions[i-1].eventValue.beatsPerMinute = 60*1000/(musicData[i]-musicData[i-1]);
     }
     map.pathData.push( new ADOFAI.PathData("R") );
     

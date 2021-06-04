@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Script -->
-    <script src="./analyzeSong.js?v=6" defer></script>
-    <script src="./mapGenerator.js?v=6" type="module"></script>
+    <script src="./analyzeSong.js?v=7" defer></script>
+    <script src="./mapGenerator.js?v=7" type="module"></script>
 
     <title>ADOFAI Map Generator</title>
 </head>
@@ -16,7 +16,7 @@
         <legend style="font-size: 2em; font-weight: bold;">Input</legend>
         <input id="audio_file" type="file" accept="audio/*" onchange="audioAccepted(this.files[0], this)"/>
         <form id="configWarper">
-            <label for="analyzeTick" style="font-weight: bold;">Analyze Tick (ms)</label>
+            <label for="analyzeTick" style="font-weight: bold;">Analyze Tick (sec)</label>
             <input type="number" name="analyzeTick" value="0.08" step="0.01">
             <label style="color: #8008;">This determines the difficuly</label>
             <br>
