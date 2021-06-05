@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Script -->
-    <script src="./analyzeSong.js?v=9" defer></script>
-    <script src="./mapGenerator.js?v=9" type="module"></script>
+    <script src="./analyzeSong.js?v=10" defer></script>
+    <script src="./mapGenerator.js?v=10" type="module"></script>
 
     <title>ADOFAI Map Generator</title>
 </head>
@@ -18,19 +18,19 @@
         <form id="configWarper">
             <label for="analyzeTick" style="font-weight: bold;">Analyze Tick (sec)</label>
             <input type="number" name="analyzeTick" value="0.08" step="0.01" min="0.01">
-            <label style="color: #8008;">This determines the difficuly (and tile count) [0.01 ~ ]</label>
+            <label style="color: #8008;">Decrease this to put more beat [0.01 ~ ]</label>
             <br>
             <label for="minimumDifference" style="font-weight: bold;">Minimum difference</label>
             <input type="number" name="minimumDifference" value="0.1" step="0.01" max="0.3" min="0">
-            <label style="color: #8008;">Increaseing this to get better result but less tile count [0 ~ 0.3]</label>
+            <label style="color: #8008;">Increase this to delete wrong beat [0 ~ 0.3]</label>
             <br>
             <!--<label for="bpmSet" style="font-weight: bold;">BPM (empty = auto)</label>
             <input type="number" name="bpmSet" value="0">
             <label style="color: #8008;">Give correct BPM to get better result</label>
-            <br>
+            <br>-->
             <label for="linearBool" style="font-weight: bold;">Linear</label>
             <input type="checkbox" name="linearBool" checked>
-            <label style="color: #8008;">Sometimes, a non-linear will give the wrong result</label>-->
+            <label style="color: #8008;">Make linear map</label>
         </form>
     </fieldset>
     <fieldset style="min-height: 80vh; width: 90vw;">

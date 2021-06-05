@@ -35,7 +35,7 @@ function analyzeSong() {
         channelToanAnalyze.push( channels.reduce((a, _, idx) => a+channels[idx][i], 0)/channelCount );
     }
 
-    const perDt = (Math.max(document.getElementsByName("analyzeTick")[0].value, 0.001) || 0.1)*1000;
+    const perDt = (Number(document.getElementsByName("analyzeTick")[0].value) || 0.1)*1000;
     const per = Math.floor(channelToanAnalyze.length/audioData.duration*perDt/1000);
     let skippedData = [];
     for (let i = 0, l = channelToanAnalyze.length/per; i < l; i++) {
