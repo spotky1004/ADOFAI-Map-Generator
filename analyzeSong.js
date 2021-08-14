@@ -36,9 +36,11 @@ function analyzeSong() {
     }
 
     const perDt = (Number(document.getElementsByName("analyzeTick")[0].value) || 0.1)*1000;
-    const per = Math.floor(channelToanAnalyze.length/audioData.duration*perDt/1000);
+    const dtPerTick = audioData.duration/channelToanAnalyze.length*1000;
+    const per = Math.floor(perDt/dtPerTick);
+    console.log(perDt, dtPerTick, per);
     let skippedData = [];
-    for (let i = 0, l = channelToanAnalyze.length/per; i < l; i++) {
+    for (let i = 0, l = Math.min(channelToanAnalyze.length, channelToanAnalyze.length/per); i < l; i++) {
         skippedData.push(channelToanAnalyze.slice(per*i, per*(i+1)).reduce((a, b) => a = Math.max(a, b), 0));
     }
 
@@ -52,7 +54,7 @@ function analyzeSong() {
         if (skippedData[i] > lastData && skippedData[i] > 0.1 && skippedData[i] > min+minimumDifference) {
             scanningPeak = i;
         } else if (scanningPeak !== -1) {
-            audioData.beatDetectTime.push(Math.floor(perDt*scanningPeak));
+            audioData.beatDetectTime.push(Math.floor(perDt*scanningPeak*1000));
             audioData.beatDetectRespectively.push(skippedData[scanningPeak]);
             min = skippedData[scanningPeak];
             scanningPeak = -1;
@@ -62,5 +64,5 @@ function analyzeSong() {
         lastData = skippedData[i];
     }
 
-    generateMap(audioData.beatDetectTime);
+    generateMap(audioData.beatDetectTime.map(e => e/1000));
 }

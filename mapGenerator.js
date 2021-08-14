@@ -45,6 +45,7 @@ function generateMap(musicData) {
     let bpmMap = [];
     for (let i = 1, l = musicData.length; i < l; i++) {
         bpmMap.push( 60*1000/(musicData[i]-musicData[i-1]) );
+        console.assert(musicData[i] !== musicData[i-1] , musicData[i], musicData[i-1])
     }
 
     let counter = {};
